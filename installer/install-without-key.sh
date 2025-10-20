@@ -64,7 +64,7 @@ print_center() {
 
   while read line; do
     unset space
-    x=$(((54 - ${# line}) / 2))
+    x=$(( (54 - ${# line}) / 2))
     for ((i = 0; i < $x; i++)); do
       space+=' '
     done
