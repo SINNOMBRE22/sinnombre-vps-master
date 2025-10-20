@@ -2,7 +2,7 @@
 ```
 * sinnombre-vps-master (Final Version OF VPS-MX 8.5x)
 ```
-![logo](https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/main/sinnombre-vps-master.png)
+![logo](https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/sinnombre-vps-master.png)
 
 ```
 # SCRIPT VPS•AGN ® VPS Script Manager
@@ -70,6 +70,7 @@ rm -rf install-without-key.sh; apt update; apt install curl; apt install bc; wge
 
 ```
 ? https://t.me/AAAAAEXQOSyIpN2JZ0ehUQ [  ???? ] ?
+
 
 
 
