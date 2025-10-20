@@ -15,7 +15,7 @@ echo "$v1" >/etc/versin_script
 [[ ! -e /etc/versin_script ]] && echo 1 >/etc/versin_script
 v22=$(cat /etc/versin_script)
 vesaoSCT="\033[1;31m [ \033[1;32m($v22)\033[1;97m\033[1;31m ]"
-# ## COLOR Y BARRA
+### COLORS AND BAR
 msg() {
    BRAN='\033[1;37m' && RED='\e[31m' && GREEN='\e[32m' && YELLOW='\e[33m'
   BLUE='\e[34m' && MAGENTA='\e[35m' && MAG='\033[1;36m' && BLACK='\e[1m' && SEMCOR='\e[0m'
@@ -31,6 +31,7 @@ msg() {
   "-bar2" | "-bar") cor="${RED}————————————————————————————————————————————————————" && echo -e "${SEMCOR}${cor}${SEMCOR}" ;;
   esac
 }
+
 fun_bar() {
   comando="$1"
   _=$(
@@ -41,7 +42,7 @@ fun_bar() {
   while [[ -d /proc/$pid ]]; do
     echo -ne " \033[1;33m["
     for ((i = 0; i < 20; i++)); do
-      echo -ne "\033[1;31m# #"
+      echo -ne "\033[1;31m##"
       sleep 0.5
     done
     echo -ne "\033[1;33m]"
@@ -50,7 +51,7 @@ fun_bar() {
     tput cuu1
     tput dl1
   done
-  echo -e " \033[1;33m[\033[1;31m# #######################################\033[1;33m] - \033[1;32m100%\033[0m"
+  echo -e " \033[1;33m[\033[1;31m########################################\033[1;33m] - \033[1;32m100%\033[0m"
   sleep 1s
 }
 
@@ -64,7 +65,7 @@ print_center() {
 
   while read line; do
     unset space
-    x=$(((54 - ${# line}) / 2))
+    x=$(((54 - ${#line}) / 2))
     for ((i = 0; i < $x; i++)); do
       space+=' '
     done
@@ -91,12 +92,12 @@ title() {
 
 
 stop_install() {
-  title "𝙸𝙽𝚂𝚃𝙰𝙻𝙰𝙲𝙸𝙾́𝙽 𝙲𝙰𝙽𝙲𝙴𝙻𝙰𝙳𝙰"
+  title "INSTALLATION CANCELED"
   exit
 }
 
 time_reboot() {
-  print_center -ama "𝚁𝙴𝚂𝙴𝚃𝙴𝙰𝙽𝙳𝙾 𝚅𝙿𝚂 𝙴𝙽 $1 𝚂𝙴𝙶𝚄𝙽𝙳𝙾𝚂"
+  print_center -ama "RESTARTING VPS IN $1 SECONDS"
   REBOOT_TIMEOUT="$1"
 
   while [ $REBOOT_TIMEOUT -gt 0 ]; do
@@ -118,7 +119,7 @@ os_system() {
 }
 
 repo() {
-  link="https://raw.githubusercontent.com/SINNOMBRE22/Multi-Script/main/Source-List/20.04.list"
+  link="https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/script-v2.1x/20.04.list"
   case $1 in
   8 | 9 | 10 | 11 | 16.04 | 18.04 | 20.04 | 20.10 | 21.04 | 21.10 | 22.04) wget -O /etc/apt/sources.list ${link} &>/dev/null ;;
   esac
@@ -128,7 +129,7 @@ dependencias() {
   soft="sudo bsdmainutils zip unzip ufw curl python python3 python3-pip openssl screen cron iptables lsof pv boxes nano at mlocate gawk grep bc jq curl npm nodejs socat netcat netcat-traditional net-tools cowsay figlet lolcat"
 
   for i in $soft; do
-    leng="${# i}"
+    leng="${#i}"
     puntos=$((21 - $leng))
     pts="."
     for ((a = 0; a < $puntos; a++)); do
@@ -202,36 +203,6 @@ install_continue() {
   read -t 60 -n 1 -rsp $'\033[1;39m       << Press enter to continue >>\n'
 }
 
-while :; do
-  case $1 in
-  -s | --start) install_start && post_reboot && time_reboot "15" ;;
-  -c | --continue)
-    # rm /root/install-without-key.sh &>/dev/null
-    sed -i '/installer/d' /root/.bashrc
-    install_continue
-    break
-    ;;
-  # -u | --update)
-  # install_start
-  # install_continue
-  # break
-  # ;;
-  *) exit ;;
-  esac
-done
-
-clear && clear
-msg -bar2
-echo -e " \e[5m\033[1;100m   =====>> ►► 🐲 VPS-SN - SCRIPT  🐲 ◄◄ <<=====   \033[1;37m"
-msg -bar2
-print_center -ama "AVAILABLE SCRIPT LIST"
-msg -bar
-# -BASH SOPORTE ONLINE
-wget https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/LINKS-LIBRARIES/SPR.sh -O /usr/bin/SPR >/dev/null 2>&1
-chmod +x /usr/bin/SPR
-
-
-# VPS-SN 8.6 OFFICIAL
 install_official() {
   clear && clear
   msg -bar
@@ -301,7 +272,7 @@ install_official() {
   echo 'echo -e "\t\033[92mRESELLER : $mess1 "' >>.bashrc
   echo 'echo -e "\t\e[1;33mVERSION: \e[1;31m$(cat /etc/versin_script_new)"' >>.bashrc
   echo 'echo "" ' >>.bashrc
-  echo 'echo -e "\t\033[97mTO DISPLAY BASH PANEL TYPE: sudo VPSAGN or menu "' >>.bashrc
+  echo 'echo -e "\t\033[97mTO DISPLAY BASH PANEL TYPE: sudo VPS or menu "' >>.bashrc
   echo 'echo ""' >>.bashrc
   rm -rf /usr/bin/pytransform &>/dev/null
   rm -rf VPS-SN.sh
@@ -317,7 +288,7 @@ install_official() {
 # MENUS
 /bin/cp /etc/skel/.bashrc ~/
 /bin/cp /etc/skel/.bashrc /etc/bash.bashrc
-echo -ne " \e[1;93m [\e[1;32m1\e[1;93m]\033[1;31m > \e[1;97m INSTALL 8.5x OFFICIAL \e[97m \n"
+echo -ne " \e[1;93m [\e[1;32m1\e[1;93m]\033[1;31m > \e[1;97m INSTALL OFFICIAL 8.6 \e[97m \n"
 msg -bar
 echo -ne "\033[1;97mEnter only the number according to your answer:\e[32m "
 read opcao
