@@ -15,7 +15,7 @@ echo "$v1" >/etc/versin_script
 [[ ! -e /etc/versin_script ]] && echo 1 >/etc/versin_script
 v22=$(cat /etc/versin_script)
 vesaoSCT="\033[1;31m [ \033[1;32m($v22)\033[1;97m\033[1;31m ]"
-### COLOR Y BARRA
+# ## COLOR Y BARRA
 msg() {
    BRAN='\033[1;37m' && RED='\e[31m' && GREEN='\e[32m' && YELLOW='\e[33m'
   BLUE='\e[34m' && MAGENTA='\e[35m' && MAG='\033[1;36m' && BLACK='\e[1m' && SEMCOR='\e[0m'
@@ -41,7 +41,7 @@ fun_bar() {
   while [[ -d /proc/$pid ]]; do
     echo -ne " \033[1;33m["
     for ((i = 0; i < 20; i++)); do
-      echo -ne "\033[1;31m##"
+      echo -ne "\033[1;31m# #"
       sleep 0.5
     done
     echo -ne "\033[1;33m]"
@@ -50,7 +50,7 @@ fun_bar() {
     tput cuu1
     tput dl1
   done
-  echo -e " \033[1;33m[\033[1;31m########################################\033[1;33m] - \033[1;32m100%\033[0m"
+  echo -e " \033[1;33m[\033[1;31m# #######################################\033[1;33m] - \033[1;32m100%\033[0m"
   sleep 1s
 }
 
@@ -64,7 +64,7 @@ print_center() {
 
   while read line; do
     unset space
-    x=$(((54 - ${#line}) / 2))
+    x=$(((54 - ${# line}) / 2))
     for ((i = 0; i < $x; i++)); do
       space+=' '
     done
@@ -128,7 +128,7 @@ dependencias() {
   soft="sudo bsdmainutils zip unzip ufw curl python python3 python3-pip openssl screen cron iptables lsof pv boxes nano at mlocate gawk grep bc jq curl npm nodejs socat netcat netcat-traditional net-tools cowsay figlet lolcat"
 
   for i in $soft; do
-    leng="${#i}"
+    leng="${# i}"
     puntos=$((21 - $leng))
     pts="."
     for ((a = 0; a < $puntos; a++)); do
@@ -206,15 +206,15 @@ while :; do
   case $1 in
   -s | --start) install_start && post_reboot && time_reboot "15" ;;
   -c | --continue)
-    #rm /root/install-without-key.sh &>/dev/null
+    # rm /root/install-without-key.sh &>/dev/null
     sed -i '/installer/d' /root/.bashrc
     install_continue
     break
     ;;
   # -u | --update)
-  #   install_start
-  #   install_continue
-  #   break
+  # install_start
+  # install_continue
+  # break
   # ;;
   *) exit ;;
   esac
@@ -226,12 +226,12 @@ echo -e " \e[5m\033[1;100m   =====>> ►► 🐲 sinnombre-vps-master - SCRIPT  
 msg -bar2
 print_center -ama "AVAILABLE SCRIPT LIST"
 msg -bar
-#-BASH SOPORTE ONLINE
+# -BASH SOPORTE ONLINE
 wget https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/LINKS-LIBRARIES/SPR.sh -O /usr/bin/SPR >/dev/null 2>&1
 chmod +x /usr/bin/SPR
 
 
-#sinnombre-vps-master 8.6 OFFICIAL
+# sinnombre-vps-master 8.6 OFFICIAL
 install_official() {
   clear && clear
   msg -bar
@@ -242,10 +242,10 @@ install_official() {
   clear && clear
   mkdir /etc/sinnombre-vps-master >/dev/null 2>&1
   cd /etc
-  wget https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/script-v2.1x/sinnombre-vps-master.tar.xz >/dev/null 2>&1
-  tar -xf sinnombre-vps-master.tar.xz >/dev/null 2>&1
-  chmod +x sinnombre-vps-master.tar.xz >/dev/null 2>&1
-  rm -rf sinnombre-vps-master.tar.xz
+  wget https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/script-v2.1x/VPS-SN.tar.xz >/dev/null 2>&1
+  tar -xf VPS-SN.tar.xz >/dev/null 2>&1
+  chmod +x VPS-SN.tar.xz >/dev/null 2>&1
+  rm -rf VPS-SN.tar.xz
   cd
   chmod -R 755 /etc/sinnombre-vps-master
   rm -rf /etc/sinnombre-vps-master/MEUIPvps
@@ -281,7 +281,7 @@ install_official() {
   v1=$(curl -sSL "https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/script-v2.1x/Version")
   echo "$v1" >/etc/versin_script
   wget -O /etc/versin_script_new https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/script-v2.1x/Version &>/dev/null
-  echo '#!/bin/sh -e' >/etc/rc.local
+  echo '# !/bin/sh -e' >/etc/rc.local
   sudo chmod +x /etc/rc.local
   echo "sudo resetsshdrop" >>/etc/rc.local
   echo "sleep 2s" >>/etc/rc.local
@@ -314,7 +314,7 @@ install_official() {
   echo -e "                      \033[1;41m  menu  \033[0;37m" && msg -bar2
 }
 
-#MENUS
+# MENUS
 /bin/cp /etc/skel/.bashrc ~/
 /bin/cp /etc/skel/.bashrc /etc/bash.bashrc
 echo -ne " \e[1;93m [\e[1;32m1\e[1;93m]\033[1;31m > \e[1;97m INSTALL 8.5x OFFICIAL \e[97m \n"
