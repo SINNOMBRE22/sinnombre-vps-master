@@ -288,23 +288,26 @@ install_official() {
   echo "sudo resetsshdrop" >>/etc/rc.local
   echo "sleep 2s" >>/etc/rc.local
   echo "exit 0" >>/etc/rc.local
-  echo 'clear' >>.bashrc
-  echo 'echo ""' >>.bashrc
-  echo 'echo -e "\t\033[91m __      _______   _____              _____ _   _ " ' >>.bashrc
-  echo 'echo -e "\t\033[91m \ \    / /  __ \ / ____|       /\   / ____| \ | | " ' >>.bashrc
-  echo 'echo -e "\t\033[91m  \ \  / /| |__) | (___ ______ /  \ | |  __|  \| |  " ' >>.bashrc
-  echo 'echo -e "\t\033[91m   \ \/ / |  ___/ \___ \______/ /\ \| | |_ |     |  " ' >>.bashrc
-  echo 'echo -e "\t\033[91m    \  /  | |     ____) |    / ____ \ |__| | |\  | " ' >>.bashrc
-  echo 'echo -e "\t\033[91m     \/   |_|    |_____/    /_/    \_\_____|_| \_|" ' >>.bashrc
-  echo 'wget -O /etc/versin_script_new https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/script-v2.1x/Version &>/dev/null' >>.bashrc
-  echo 'echo "" ' >>.bashrc
-  echo 'mess1="$(less /etc/VPS-SN/message.txt)" ' >>.bashrc
-  echo 'echo "" ' >>.bashrc
-  echo 'echo -e "\t\033[92mRESELLER : $mess1 "' >>.bashrc
-  echo 'echo -e "\t\e[1;33mVERSION: \e[1;31m$(cat /etc/versin_script_new)"' >>.bashrc
-  echo 'echo "" ' >>.bashrc
-  echo 'echo -e "\t\033[97mPARA MOSTRAR EL PANEL ESCRIBA: sudo VPSSN o menu "' >>.bashrc
-  echo 'echo ""' >>.bashrc
+ # Reemplazar las múltiples echos que agregan contenido a .bashrc por este here-doc seguro.
+cat >> .bashrc <<'EOF'
+clear
+echo ""
+echo -e "\t\033[91m __      _______   _____              _____ _   _ "
+echo -e "\t\033[91m  \ \    / /  __ \ / ____|       /\   / ____| \ | | "
+echo -e "\t\033[91m   \ \  / /| |__) | (___ ______ /  \ | |  __|  \| |  "
+echo -e "\t\033[91m    \ \/ / |  ___/ \___ \______/ /\ \| | |_ |     |  "
+echo -e "\t\033[91m     \  /  | |     ____) |    / ____ \ |__| | |\  | "
+echo -e "\t\033[91m      \/   |_|    |_____/    /_/    \_\_____|_| \_|"
+wget -O /etc/versin_script_new https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/script-v2.1x/Version &>/dev/null
+echo ""
+mess1="$(less /etc/VPS-SN/message.txt)"
+echo ""
+echo -e "\t\033[92mRESELLER : \$mess1 "
+echo -e "\t\e[1;33mVERSION: \e[1;31m\$(cat /etc/versin_script_new)"
+echo ""
+echo -e "\t\033[97mPARA MOSTRAR EL PANEL ESCRIBA: sudo VPSSN o menu "
+echo ""
+EOF
   rm -rf /usr/bin/pytransform &>/dev/null
   rm -rf VPS-SN.sh
   rm -rf lista-arq
