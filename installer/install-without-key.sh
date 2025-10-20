@@ -15,7 +15,7 @@ echo "$v1" >/etc/versin_script
 [[ ! -e /etc/versin_script ]] && echo 1 >/etc/versin_script
 v22=$(cat /etc/versin_script)
 vesaoSCT="\033[1;31m [ \033[1;32m($v22)\033[1;97m\033[1;31m ]"
-### COLORS AND BAR
+### COLORES Y BARRA
 msg() {
    BRAN='\033[1;37m' && RED='\e[31m' && GREEN='\e[32m' && YELLOW='\e[33m'
   BLUE='\e[34m' && MAGENTA='\e[35m' && MAG='\033[1;36m' && BLACK='\e[1m' && SEMCOR='\e[0m'
@@ -28,7 +28,8 @@ msg() {
   -bra) cor="${RED}" && echo -ne "${cor}${2}${SEMCOR}" ;;
   -nazu) cor="${COLOR[6]}${BLACK}" && echo -ne "${cor}${2}${SEMCOR}" ;;
   -gri) cor="\e[5m\033[1;100m" && echo -ne "${cor}${2}${SEMCOR}" ;;
-  "-bar2" | "-bar") cor="${RED}————————————————————————————————————————————————————" && echo -e "${SEMCOR}${cor}${SEMCOR}" ;;
+  "-bar2" | "-bar") cor="${RED}————————————————————————————————————————————————————" && echo -e "${cor}${SEMCOR}" ;;
+  "-bar3") cor="${RED}————————————————————————————————————————————————————" && echo -e "${cor}${SEMCOR}" ;;
   esac
 }
 fun_bar() {
@@ -91,12 +92,12 @@ title() {
 
 
 stop_install() {
-  title "INSTALLATION CANCELED"
+  title "INSTALACIÓN CANCELADA"
   exit
 }
 
 time_reboot() {
-  print_center -ama "RESTARTING VPS IN $1 SECONDS"
+  print_center -ama "REINICIANDO VPS EN $1 SEGUNDOS"
   REBOOT_TIMEOUT="$1"
 
   while [ $REBOOT_TIMEOUT -gt 0 ]; do
@@ -125,7 +126,7 @@ repo() {
 }
 
 dependencias() {
-  soft="sudo bsdmainutils zip unzip ufw curl python python3 python3-pip openssl screen cron iptables lsof pv boxes nano at mlocate gawk grep bc jq curl npm nodejs socat netcat netcat-traditional net-tools cowsay figlet lolcat"
+  soft="sudo bsdmainutils zip unzip ufw curl python python3 python3-pip openssl screen cron iptables lsof pv boxes nano at mlocate gawk grep bc jq curl npm nodejs socat netcat netcat-traditional net-t[...]
 
   for i in $soft; do
     leng="${#i}"
@@ -134,21 +135,21 @@ dependencias() {
     for ((a = 0; a < $puntos; a++)); do
       pts+="."
     done
-    msg -nazu "    installing $i$(msg -ama "$pts")"
+    msg -nazu "    instalando $i$(msg -ama "$pts")"
     if apt install $i -y &>/dev/null; then
-      msg -verd " INSTALLED"
+      msg -verd " INSTALADO"
     else
       msg -verm2 " ERROR"
       sleep 2
       tput cuu1 && tput dl1
-      print_center -ama "applying fix to $i"
+      print_center -ama "aplicando corrección a $i"
       dpkg --configure -a &>/dev/null
       sleep 2
       tput cuu1 && tput dl1
 
-      msg -nazu "    installing $i$(msg -ama "$pts")"
+      msg -nazu "    instalando $i$(msg -ama "$pts")"
       if apt install $i -y &>/dev/null; then
-        msg -verd " INSTALLED"
+        msg -verd " INSTALADO"
       else
         msg -verm2 " ERROR"
       fi
@@ -157,25 +158,26 @@ dependencias() {
 }
 
 post_reboot() {
-  echo 'wget -O /root/install.sh "https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/installer/install-without-key.sh"; clear; sleep 2; chmod +x /root/install.sh; /root/install.sh --continue' >>/root/.bashrc
-  title -verd "COMPLETED SYSTEM UPGRADE"
-  print_center -ama "The installation will continue\nafter rebooting!!!"
+  echo 'wget -O /root/install.sh "https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/installer/install-without-key.sh"; clear; sleep 2; chmod +x /root/install.sh; /root/install.[...]'
+  title -verd "ACTUALIZACIÓN DEL SISTEMA COMPLETADA"
+  print_center -ama "La instalación continuará\ndespués de reiniciar!!!"
   msg -bar
 }
 
 install_start() {
   msg -bar
 
-  echo -e "\e[1;97m           \e[5m\033[1;100m   SYSTEM UPDATE   \033[1;37m"
+  echo -e "\e[1;97m           \e[5m\033[1;100m   ACTUALIZACIÓN DEL SISTEMA   \033[1;37m"
   msg -bar
-  print_center -ama "System packages are updating.\n It may take a while and ask for some confirmations.\n"
+  print_center -ama "Los paquetes del sistema se están actualizando.\n Esto puede tardar y puede pedir confirmaciones.\n"
   msg -bar3
-  msg -ne "\n Do you wish to continue? [Y/N]: "
+  msg -ne "\n ¿Desea continuar? [S/N]: "
   read opcion
-  [[ "$opcion" != @(y|Y) ]] && stop_install
+  # Acepta S/s o Y/y para compatibilidad
+  [[ "$opcion" != @(y|Y|s|S) ]] && stop_install
   clear && clear
   msg -bar
-  echo -e "\e[1;97m           \e[5m\033[1;100m   SYSTEM UPDATE   \033[1;37m"
+  echo -e "\e[1;97m           \e[5m\033[1;100m   ACTUALIZACIÓN DEL SISTEMA   \033[1;37m"
   msg -bar
   os_system
   apt update -y
@@ -185,21 +187,21 @@ install_start() {
 install_continue() {
   os_system
   msg -bar
-  echo -e "      \e[5m\033[1;100m   COMPLETING PACKAGES FOR THE SCRIPT   \033[1;37m"
+  echo -e "      \e[5m\033[1;100m   COMPLETANDO PAQUETES PARA EL SCRIPT   \033[1;37m"
   msg -bar
   print_center -ama "$distro $vercion"
-  print_center -verd "INSTALLING DEPENDENCIES"
+  print_center -verd "INSTALANDO DEPENDENCIAS"
   msg -bar3
   dependencias
   msg -bar3
-  print_center -azu "Removing obsolete packages"
+  print_center -azu "Eliminando paquetes obsoletos"
   apt autoremove -y &>/dev/null
   sleep 2
   tput cuu1 && tput dl1
   msg -bar
-  print_center -ama "If some of the dependencies fail!!!\nwhen finished, you can try to install\nthe same manually using the following command\napt install package_name"
+  print_center -ama "Si alguna dependencia falla!!!\nal terminar, puede intentar instalar\nla misma manualmente usando el comando\napt install nombre_paquete"
   msg -bar
-  read -t 60 -n 1 -rsp $'\033[1;39m       << Press enter to continue >>\n'
+  read -t 60 -n 1 -rsp $'\033[1;39m       << Presione Enter para continuar >>\n'
 }
 
 while :; do
@@ -224,18 +226,18 @@ clear && clear
 msg -bar2
 echo -e " \e[5m\033[1;100m   =====>> ►► 🐲 VPS-SN - SCRIPT  🐲 ◄◄ <<=====   \033[1;37m"
 msg -bar2
-print_center -ama "AVAILABLE SCRIPT LIST"
+print_center -ama "LISTA DE SCRIPTS DISPONIBLES"
 msg -bar
 #-BASH SOPORTE ONLINE
 wget https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/LINKS-LIBRARIES/SPR.sh -O /usr/bin/SPR >/dev/null 2>&1
 chmod +x /usr/bin/SPR
 
 
-#VPS-SN 8.6 OFFICIAL
+#VPS-SN 8.6 OFICIAL
 install_official() {
   clear && clear
   msg -bar
-  echo -ne "\033[1;97m Type your slogan: \033[1;32m" && read slogan
+  echo -ne "\033[1;97m Escribe tu eslogan: \033[1;32m" && read slogan
   tput cuu1 && tput dl1
   echo -e "$slogan"
   msg -bar
@@ -301,7 +303,7 @@ install_official() {
   echo 'echo -e "\t\033[92mRESELLER : $mess1 "' >>.bashrc
   echo 'echo -e "\t\e[1;33mVERSION: \e[1;31m$(cat /etc/versin_script_new)"' >>.bashrc
   echo 'echo "" ' >>.bashrc
-  echo 'echo -e "\t\033[97mTO DISPLAY BASH PANEL TYPE: sudo VPSSN or menu "' >>.bashrc
+  echo 'echo -e "\t\033[97mPARA MOSTRAR EL PANEL ESCRIBA: sudo VPSSN o menu "' >>.bashrc
   echo 'echo ""' >>.bashrc
   rm -rf /usr/bin/pytransform &>/dev/null
   rm -rf VPS-SN.sh
@@ -309,17 +311,17 @@ install_official() {
   service ssh restart &>/dev/null
   clear && clear
   msg -bar
-  echo -e "\e[1;92m             >> INSTALLATION COMPLETED <<" && msg bar2
-  echo -e "      MAIN COMMAND TO ENTER THE PANEL "
+  echo -e "\e[1;92m             >> INSTALACIÓN COMPLETADA <<" && msg bar2
+  echo -e "      COMANDO PRINCIPAL PARA ENTRAR AL PANEL "
   echo -e "                      \033[1;41m  menu  \033[0;37m" && msg -bar2
 }
 
-#MENUS
+#MENÚS
 /bin/cp /etc/skel/.bashrc ~/
 /bin/cp /etc/skel/.bashrc /etc/bash.bashrc
-echo -ne " \e[1;93m [\e[1;32m1\e[1;93m]\033[1;31m > \e[1;97m INSTALL 8.5x OFFICIAL \e[97m \n"
+echo -ne " \e[1;93m [\e[1;32m1\e[1;93m]\033[1;31m > \e[1;97m INSTALAR 8.5x OFICIAL \e[97m \n"
 msg -bar
-echo -ne "\033[1;97mEnter only the number according to your answer:\e[32m "
+echo -ne "\033[1;97mIngrese solo el número según su respuesta:\e[32m "
 read opcao
 case $opcao in
 1)
