@@ -4,7 +4,7 @@ clear
 clear
 # DIRECCIONES DE CARPETAS Y ARCHIVOS
 
-SCPdir="/etc/sinnombre-vps-master" && [[ ! -d ${SCPdir} ]] && exit 1
+SCPdir="/etc/VPS-SN" && [[ ! -d ${SCPdir} ]] && exit 1
 SCPusr="${SCPdir}/controller" && [[ ! -d ${SCPusr} ]] && mkdir ${SCPusr}
 SCPfrm="${SCPdir}/tools" && [[ ! -d ${SCPfrm} ]] && mkdir ${SCPfrm}
 SCPinst="${SCPdir}/protocols" && [[ ! -d ${SCPfrm} ]] && mkdir ${SCPfrm}
@@ -19,7 +19,7 @@ USRdatacredi="/etc/BOT-C2/creditos"
 
 ##### SERVIDOR TELEGRAM PERSONAL
 [[ $(dpkg --get-selections | grep -w "jq" | head -1) ]] || apt-get install jq -y &>/dev/null
-[[ ! -e "/bin/ShellBot.sh" ]] && wget -O /bin/ShellBot.sh https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/LINKS-LIBRERIAS/ShellBot.sh &>/dev/null
+[[ ! -e "/bin/ShellBot.sh" ]] && wget -O /bin/ShellBot.sh https://raw.githubusercontent.com/SINNOMBRE22/VPS-SN/master/LINKS-LIBRERIAS/ShellBot.sh &>/dev/null
 [[ -e /etc/texto-bot ]] && rm /etc/texto-bot
 
 ##### VERIFICANDO  PAQUETES PRIMARIOS
@@ -33,7 +33,7 @@ USRdatacredi="/etc/BOT-C2/creditos"
 clear
 msg -bar
 msg -tit
-msg -ama "      ## MANAGEMENT BOT | sinnombre-vps-master  ##  \033[1;31m"
+msg -ama "      ## MANAGEMENT BOT | VPS-SN  ##  \033[1;31m"
 msg -bar
 if [[ $1 = "id" || -z $(ps aux | grep -v grep | grep -w "ADMbot.sh" | grep dmS | awk '{print $2}') ]]; then
 	[[ -z $2 ]] && echo -ne " \033[1;96m #Enter the BOT Token \033[0;92m \nTOKEN:  \033[0;97m" && read TOKEN || TOKEN="$2"
@@ -56,7 +56,7 @@ else
 	exit 0
 fi
 LINE='━━━━━━━━━━━━━━━━━━━━'
-USRdatabase="/etc/sinnombre-vps-master/sinnombre-vps-masteruser"
+USRdatabase="/etc/VPS-SN/VPS-SNuser"
 #IMPORTANDO API
 source ShellBot.sh
 ShellBot.init --token "$TOKEN"
@@ -168,13 +168,13 @@ mostrar_usuarios() {
 }
 # DEFINE UM IP
 meu_ip() {
-	if [[ -e /etc/sinnombre-vps-master/MEUIPvps ]]; then
-		echo "$(cat /etc/sinnombre-vps-master/MEUIPvps)"
+	if [[ -e /etc/VPS-SN/MEUIPvps ]]; then
+		echo "$(cat /etc/VPS-SN/MEUIPvps)"
 	else
 		MEU_IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127 \.[0-9]{1,3} \.[0-9]{1,3} \.[0-9]{1,3}' | grep -o -E '[0-9]{1,3} \.[0-9]{1,3} \.[0-9]{1,3} \.[0-9]{1,3}' | head -1)
 		MEU_IP2=$(wget -qO- ipv4.icanhazip.com)
 		[[ "$MEU_IP" != "$MEU_IP2" ]] && echo "$MEU_IP2" || echo "$MEU_IP"
-		echo "$MEU_IP" >/etc/sinnombre-vps-master/MEUIPvps
+		echo "$MEU_IP" >/etc/VPS-SN/MEUIPvps
 	fi
 }
 # USUARIO BLOCK
@@ -290,7 +290,7 @@ ajuda_fun() {
 	SSH3="$(less /etc/BOT-A/SSH20.log)"
 	SSH4="$(echo $SSH3)"
 	#ONLINES
-	ONLINES="$(less /etc/sinnombre-vps-master/USRonlines)"
+	ONLINES="$(less /etc/VPS-SN/USRonlines)"
 	##DEMOS REGISTRADOS
 	demo=$(cd /etc/BOT-TEMP && ls | wc -l)
 	cd
@@ -301,7 +301,7 @@ ajuda_fun() {
 	demor="$(echo $demo3)"
 
 	local bot_retorno="*$LINE* \n"
-	bot_retorno+="*🔰 MANAGER sinnombre-vps-master 2.0 🔰* \n"
+	bot_retorno+="*🔰 MANAGER VPS-SN 2.0 🔰* \n"
 	bot_retorno+="$LINE \n"
 	bot_retorno+="_▪️ SSH REGISTERED:_ ( *$SSH4* ) \n"
 	bot_retorno+="_▪️ CONNECTED:_ ( *$ONLINES* ) \n"
@@ -380,7 +380,7 @@ info_fun() {
 	return 0
 }
 online_fun() {
-	MyTIME="${SCPusr}/time-sinnombre-vps-master"
+	MyTIME="${SCPusr}/time-VPS-SN"
 	[[ -e ${MyTIME} ]] && source ${MyTIME} || touch ${MyTIME}
 	local bot_retorno="$LINE \n"
 	bot_retorno+="$* User Monitor*  \n"
@@ -993,7 +993,7 @@ renew_user_fun() {
 
 	[[ -z $1 ]] && error_fun && return 0
 	cup1="$1"
-	userva="$(cat /etc/sinnombre-vps-master/sinnombre-vps-masteruser | grep -w "$cup1" | cut -d'|' -f1)"
+	userva="$(cat /etc/VPS-SN/VPS-SNuser | grep -w "$cup1" | cut -d'|' -f1)"
 
 	[[ -z $userva ]] && error_fun && return 0
 
@@ -1010,9 +1010,9 @@ renew_user_fun() {
 		done
 	}
 
-	NOM=$(less /etc/sinnombre-vps-master/controller/nombre.log) >/dev/null 2>&1
+	NOM=$(less /etc/VPS-SN/controller/nombre.log) >/dev/null 2>&1
 	NOM1=$(echo $NOM) >/dev/null 2>&1
-	IP="$(cat /etc/sinnombre-vps-master/MEUIPvps)"
+	IP="$(cat /etc/VPS-SN/MEUIPvps)"
 
 	local bot_retorno="*$LINE* \n"
 	bot_retorno+="*ACCOUNT RENEWED*  \n"
@@ -1051,16 +1051,16 @@ info_sshp() {
 
 	VPSsec=$(date +%s)
 
-	sen=$(cat /etc/sinnombre-vps-master/sinnombre-vps-masteruser | grep -w "$1" | cut -d '|' -f2)
+	sen=$(cat /etc/VPS-SN/VPS-SNuser | grep -w "$1" | cut -d '|' -f2)
 	[[ -z $sen ]] && sen="???"
-	DateExp="$(cat /etc/sinnombre-vps-master/sinnombre-vps-masteruser | grep -w "$1" | cut -d'|' -f3)"
+	DateExp="$(cat /etc/VPS-SN/VPS-SNuser | grep -w "$1" | cut -d'|' -f3)"
 	if [[ ! -z $DateExp ]]; then
 		DataSec=$(date +%s --date="$DateExp")
 		[[ "$VPSsec" -gt "$DataSec" ]] && EXPTIME="${red}[EXPIRADA]" || EXPTIME="${gren}[$(($(($DataSec - $VPSsec)) / 86400))]"
 	else
 		EXPTIME="???"
 	fi
-	limit=$(cat /etc/sinnombre-vps-master/sinnombre-vps-masteruser | grep -w "$1" | cut -d '|' -f4)
+	limit=$(cat /etc/VPS-SN/VPS-SNuser | grep -w "$1" | cut -d '|' -f4)
 	[[ -z $limit ]] && limit="???"
 
 	local bot_retorno="*$LINE* \n"
@@ -1129,13 +1129,13 @@ blo_unb_fun() {
 	}
 
 	[[ -z $1 ]] && error_fun && return 0
-	local USRloked="/etc/sinnombre-vps-master/sinnombre-vps-master-userlock"
+	local USRloked="/etc/VPS-SN/VPS-SN-userlock"
 	local LIMITERLOG="${USRdatabase}/Limiter.log"
 	local LIMITERLOG2="${USRdatabase}/Limiter2.log"
 	if [[ $2 = "-loked" ]]; then
 		[[ $(cat ${USRloked} | grep -w "$1") ]] && return 1
 		echo " $1 (BLOCK-MULTILOGIN) $(date +%r--%d/%m/%y)"
-		limseg="$(less /etc/sinnombre-vps-master/controller/tiemdes.log)"
+		limseg="$(less /etc/VPS-SN/controller/tiemdes.log)"
 		KEY="2012880601:AAEJ3Kk18PGDzW57LpTMnVMn_pQYQKW3V9w"
 		URL="https://api.telegram.org/bot$KEY/sendMessage"
 		MSG="⚠️ VPS NOTICE: $NOM1 ⚠️
@@ -1203,7 +1203,7 @@ blo_unb_fun() {
 
 userblock_lee() {
 
-	local HOST="/etc/sinnombre-vps-master/sinnombre-vps-master-userlock"
+	local HOST="/etc/VPS-SN/VPS-SN-userlock"
 	local RETURN=$(cat $HOST)
 	if [[ -z $RETURN ]]; then
 		local bot_retorno="$LINE \n"
@@ -1256,16 +1256,16 @@ backups() {
 	ShellBot.sendMessage --chat_id $var \
 	--text "*$(echo -e $bot_retorno)*" \
 	--parse_mode markdown
-	cp ${USRdatabase} $HOME/sinnombre-vps-master-Backup-User
+	cp ${USRdatabase} $HOME/VPS-SN-Backup-User
 	ShellBot.sendDocument --chat_id $var \
-	--document @$HOME/sinnombre-vps-master-Backup-User
+	--document @$HOME/VPS-SN-Backup-User
 
-	#rm $HOME/sinnombre-vps-master-Backup
+	#rm $HOME/VPS-SN-Backup
 	return 0
 }
 
 restabackup() {
-	dirbackup="/root/sinnombre-vps-master-Backup-User"
+	dirbackup="/root/VPS-SN-Backup-User"
 	local msj
 	VPSsec=$(date +%s)
 	while read line; do

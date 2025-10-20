@@ -1,7 +1,7 @@
 #!/bin/bash
  clear
  
- SCPinst="/etc/sinnombre-vps-master/protocols"
+ SCPinst="/etc/VPS-SN/protocols"
  mportas () {
  unset portas
  portas_var=$(lsof -V -i tcp -P -n | grep -v "ESTABLISHED" |grep -v "COMMAND" | grep "LISTEN")
@@ -25,8 +25,8 @@
  det_py(){
  	pidproxy3=$(ps x | grep "SinNombre.py" | grep -v "grep" | awk -F "pts" '{print $1}') && [[ ! -z $pidproxy3 ]] && pid_kill $pidproxy3
  	echo -e "\033[1;91m  SOCKS ARRESTED"
- 	rm /etc/sinnombre-vps-master/PortPD.log &>/dev/null
- 	rm -rf /etc/sinnombre-vps-master/protocols/SinNombre.py
+ 	rm /etc/VPS-SN/PortPD.log &>/dev/null
+ 	rm -rf /etc/VPS-SN/protocols/SinNombre.py
  	
  	}
  
@@ -34,7 +34,7 @@
  pytho_py(){
  clear
  echo ""
- if [[ ! -e /etc/sinnombre-vps-master/fix ]]; then
+ if [[ ! -e /etc/VPS-SN/fix ]]; then
  		echo ""
  ins(){
  apt-get install python -y 
@@ -42,7 +42,7 @@
  }
  ins &>/dev/null && echo -e "INSTALLING FIXES" | pv -qL 40
  sleep 1.s
- [[ ! -e /etc/sinnombre-vps-master/fix ]] && touch /etc/sinnombre-vps-master/fix
+ [[ ! -e /etc/VPS-SN/fix ]] && touch /etc/VPS-SN/fix
  else
  echo ""
  fi
@@ -96,11 +96,11 @@
          echo -e "	\e[31mMensage: \033[1;32m ${mensage}"
      fi
      echo -e "$BARRA"
-     [[ ! -e /etc/sinnombre-vps-master/protocols/SinNombre.py ]] && rm -rf /etc/sinnombre-vps-master/protocols/SinNombre.py
+     [[ ! -e /etc/VPS-SN/protocols/SinNombre.py ]] && rm -rf /etc/VPS-SN/protocols/SinNombre.py
  #
  	# Initializing or Proxy
  	(
- 	less << CPM > /etc/sinnombre-vps-master/protocols/SinNombre.py
+ 	less << CPM > /etc/VPS-SN/protocols/SinNombre.py
  # -*- coding: utf-8 -*-
  import socket, threading, thread, select, signal, sys, time, getopt
  LISTENING_ADDR = '0.0.0.0'
@@ -305,9 +305,9 @@
 CPM
  ) > $HOME/proxy.log &
  
- chmod +x /etc/sinnombre-vps-master/protocols/SinNombre.py &>/dev/nulll
+ chmod +x /etc/VPS-SN/protocols/SinNombre.py &>/dev/nulll
  
- screen -dmS pydic-"$proxycolor" python ${SCPinst}/SinNombre.py "$proxycolor" "$mensage" && echo ""$proxycolor" "$mensage"" >> /etc/sinnombre-vps-master/PortPD.log
+ screen -dmS pydic-"$proxycolor" python ${SCPinst}/SinNombre.py "$proxycolor" "$mensage" && echo ""$proxycolor" "$mensage"" >> /etc/VPS-SN/PortPD.log
  }
  
  clear

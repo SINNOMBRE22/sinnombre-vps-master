@@ -346,7 +346,7 @@ View_User_info(){
 	clear 
 	echo -e " User [{user_name}] Account info:"
 msg -bar
-    echo -e " PANEL sinnombre-vps-master By @KhaledAGN"
+    echo -e " PANEL VPS-SN By @KhaledAGN"
 	
 	echo -e " IP : ${Green_font_prefix}${ip}${Font_color_suffix}"
 
@@ -387,8 +387,8 @@ Set_config_user(){
 msg -bar
 	echo -ne "\e[92m 1) Enter a name for the user you want to Configure\n (Do not repeat, or it will be marked incorrectly!)\n"
 msg -bar
-	stty erase '^H' && read -p "(Default: sinnombre-vps-master):" ssr_user
-	[[ -z "${ssr_user}" ]] && ssr_user="sinnombre-vps-master"
+	stty erase '^H' && read -p "(Default: VPS-SN):" ssr_user
+	[[ -z "${ssr_user}" ]] && ssr_user="VPS-SN"
 	echo && echo -e "	Username : ${Green_font_prefix}${ssr_user}${Font_color_suffix}" && echo
 }
 Set_config_port(){
@@ -416,8 +416,8 @@ Set_config_password(){
 msg -bar
 	echo -e "\e[92m 3) Please enter a password for the User"
 msg -bar
-	stty erase '^H' && read -p "(Default: sinnombre-vps-master):" ssr_password
-	[[ -z "${ssr_password}" ]] && ssr_password="sinnombre-vps-master"
+	stty erase '^H' && read -p "(Default: VPS-SN):" ssr_password
+	[[ -z "${ssr_password}" ]] && ssr_password="VPS-SN"
 	echo && echo -e "	Password : ${Green_font_prefix}${ssr_password}${Font_color_suffix}" && echo
 }
 Set_config_method(){
@@ -1974,7 +1974,7 @@ msg -bar
 	if [[ -e ${ssr_folder} ]]; then
 		check_pid
 		if [[ ! -z "${PID}" ]]; then
-			 echo -e "         sinnombre-vps-master By @KhaledAGN\n Actual state: ${Green_font_prefix}installed${Font_color_suffix} and ${Green_font_prefix}Initiated${Font_color_suffix}"
+			 echo -e "         VPS-SN By @KhaledAGN\n Actual state: ${Green_font_prefix}installed${Font_color_suffix} and ${Green_font_prefix}Initiated${Font_color_suffix}"
 		else
 			echo -e " Actual state: ${Green_font_prefix}installed${Font_color_suffix} but ${Red_font_prefix}did not start${Font_color_suffix}"
 		fi

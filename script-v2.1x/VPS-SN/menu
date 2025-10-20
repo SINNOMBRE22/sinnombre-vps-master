@@ -13,8 +13,8 @@ _hora=$(printf '%(%D-%H:%M:%S)T')
 red=$(tput setaf 1)
 gren=$(tput setaf 2)
 yellow=$(tput setaf 3)
-SCPdir="/etc/sinnombre-vps-master" && [[ ! -d ${SCPdir} ]] && exit 1
-DIR="/etc/sinnombre-vps-master"
+SCPdir="/etc/VPS-SN" && [[ ! -d ${SCPdir} ]] && exit 1
+DIR="/etc/VPS-SN"
 SCPusr="${SCPdir}/controller"
 SCPfrm="${SCPdir}/tools"
 SCPinst="${SCPdir}/protocols"
@@ -38,10 +38,10 @@ msg() {
     [[ $v11 = $v22 ]] && vesaoSCT="\033[1;37mVersion\033[1;32m $v22 \033[1;31m]" || vesaoSCT="\033[1;31m($v22)\033[1;97m→\033[1;32m($v11)\033[1;31m  ]"
     aviso_bock() {
         echo 'echo -e "\033[1;91m————————————————————————————————————————————————————\n       ¡LOCKED SCRIPT ! \n————————————————————————————————————————————————————"' >/usr/bin/menu
-        echo 'echo -e "\033[1;91m————————————————————————————————————————————————————\n       ¡LOCKED SCRIPT ! \n————————————————————————————————————————————————————"' >/usr/bin/sinnombre-vps-master
-        rm -rf /etc/sinnombre-vps-master
+        echo 'echo -e "\033[1;91m————————————————————————————————————————————————————\n       ¡LOCKED SCRIPT ! \n————————————————————————————————————————————————————"' >/usr/bin/VPS-SN
+        rm -rf /etc/VPS-SN
     }
-    local colors="/etc/sinnombre-vps-master/colors"
+    local colors="/etc/VPS-SN/colors"
     if [[ ! -e $colors ]]; then
         COLOR[0]='\033[1;37m' #BRAN='\033[1;37m'
         COLOR[1]='\e[93m'     #RED='\e[31m'
@@ -88,7 +88,7 @@ canbio_color() {
     clear
     msg -bar2
     msg -tit
-    msg -ama "     sinnombre-vps-master SCRIPT COLOR CONTROLLER"
+    msg -ama "     VPS-SN SCRIPT COLOR CONTROLLER"
     msg -bar2
     msg -ama "$(fun_trans "Select 7 colors"): "
     echo -e '\033[1;37m [1] ###\033[0m'
@@ -105,7 +105,7 @@ canbio_color() {
         cores+="$corselect "
         corselect=0
     done
-    echo "$cores" >/etc/sinnombre-vps-master/colors
+    echo "$cores" >/etc/VPS-SN/colors
     msg -bar2
 }
 fun_trans() {
@@ -117,12 +117,12 @@ fun_trans() {
     local LINGUAGE=$(cat ${SCPidioma})
     [[ -z $LINGUAGE ]] && LINGUAGE=en
     [[ $LINGUAGE = "en" ]] && echo "$@" && return
-    [[ ! -e /usr/bin/trans ]] && wget -O /usr/bin/trans https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/LINKS-LIBRARIES/trans &>/dev/null
-    [[ ! -e /etc/sinnombre-vps-master/texto-mx ]] && touch /etc/sinnombre-vps-master/texto-mx
-    source /etc/sinnombre-vps-master/texto-mx
+    [[ ! -e /usr/bin/trans ]] && wget -O /usr/bin/trans https://raw.githubusercontent.com/SINNOMBRE22/VPS-SN/master/LINKS-LIBRARIES/trans &>/dev/null
+    [[ ! -e /etc/VPS-SN/texto-mx ]] && touch /etc/VPS-SN/texto-mx
+    source /etc/VPS-SN/texto-mx
     if [[ -z "$(echo ${texto[$@]})" ]]; then
         retorno="$(source trans -e bing -b es:${LINGUAGE} "$@" | sed -e 's/[^a-z0-9 -]//ig' 2>/dev/null)"
-        echo "texto[$@]='$retorno'" >>/etc/sinnombre-vps-master/texto-mx
+        echo "texto[$@]='$retorno'" >>/etc/VPS-SN/texto-mx
         echo "$retorno"
     else
         echo "${texto[$@]}"
@@ -130,7 +130,7 @@ fun_trans() {
 }
 function_verify() {
 
-    v1=$(curl -sSL "https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/script-v2.1x/Version")
+    v1=$(curl -sSL "https://raw.githubusercontent.com/SINNOMBRE22/VPS-SN/master/script-v2.1x/Version")
     echo "$v1" >/etc/versin_script
 }
 atualiza_fun() {
@@ -172,7 +172,7 @@ atualiza_fun() {
         clear
         msg -bar
         msg -tit
-        echo -e "\033[1;91m      UPDATE sinnombre-vps-master SCRIPT FILES"
+        echo -e "\033[1;91m      UPDATE VPS-SN SCRIPT FILES"
         msg -bar2 && msg -ne "\033[1;93m          >>> ENTER THE KEY BELOW <<<\n   \033[1;37m" && read Key
         tput cuu1 && tput dl1
     done
@@ -189,7 +189,7 @@ atualiza_fun() {
     updatedb
     if [[ -e $HOME/lista-arq ]] && [[ ! $(cat $HOME/lista-arq | grep "Code de KEY Invalido!") ]]; then
         msg -bar2
-        msg -verd "    $(source trans -b es:es "Copied Files" | sed -e 's/[^a-z -]//ig'): \e[97m[\e[93msinnombre-vps-master #MOD\e[97m]"
+        msg -verd "    $(source trans -b es:es "Copied Files" | sed -e 's/[^a-z -]//ig'): \e[97m[\e[93mVPS-SN #MOD\e[97m]"
         REQUEST=$(ofus "$Key" | cut -d'/' -f2)
         [[ ! -d ${SCPinstal} ]] && mkdir ${SCPinstal}
         pontos="."
@@ -262,7 +262,7 @@ funcao_idioma() {
         echo -ne "\033[1;37m$(fun_trans "  ► Select an Option"): " && read selection
         tput cuu1 && tput dl1
     done
-    [[ -e /etc/sinnombre-vps-master/texto-mx ]] && rm /etc/sinnombre-vps-master/texto-mx
+    [[ -e /etc/VPS-SN/texto-mx ]] && rm /etc/VPS-SN/texto-mx
     echo "$(echo ${idioma[$selection]} | cut -d' ' -f1)" >${SCPidioma}
 }
 menu_info() {
@@ -341,13 +341,13 @@ limpar_caches() {
 fun_autorun() {
     if [[ -e /etc/bash.bashrc-bakup ]]; then
         mv -f /etc/bash.bashrc-bakup /etc/bash.bashrc
-        cat /etc/bash.bashrc | grep -v "/etc/sinnombre-vps-master/menu" >/tmp/bash
+        cat /etc/bash.bashrc | grep -v "/etc/VPS-SN/menu" >/tmp/bash
         mv -f /tmp/bash /etc/bash.bashrc
         msg -ama "$(fun_trans "SUCCESSFULLY REMOVED")"
         msg -bar
     elif [[ -e /etc/bash.bashrc ]]; then
         cat /etc/bash.bashrc | grep -v /bin/menu >/etc/bash.bashrc.2
-        echo '/etc/sinnombre-vps-master/menu' >>/etc/bash.bashrc.2
+        echo '/etc/VPS-SN/menu' >>/etc/bash.bashrc.2
         cp /etc/bash.bashrc /etc/bash.bashrc-bakup
         mv -f /etc/bash.bashrc.2 /etc/bash.bashrc
         msg -ama "$(fun_trans "AUTO INITIALIZE ADDED")"
@@ -377,19 +377,19 @@ fun_bar() {
     sleep 1s
 }
 meu_ip() {
-    if [[ -e /etc/sinnombre-vps-master/MEUIPvps ]]; then
-        echo "$(cat /etc/sinnombre-vps-master/MEUIPvps)"
+    if [[ -e /etc/VPS-SN/MEUIPvps ]]; then
+        echo "$(cat /etc/VPS-SN/MEUIPvps)"
     else
         MEU_IP=$(wget -qO- ifconfig.me)
-        echo "$MEU_IP" >/etc/sinnombre-vps-master/MEUIPvps
+        echo "$MEU_IP" >/etc/VPS-SN/MEUIPvps
     fi
 }
 fun_ip() {
-    if [[ -e /etc/sinnombre-vps-master/MEUIPvps ]]; then
-        IP="$(cat /etc/sinnombre-vps-master/MEUIPvps)"
+    if [[ -e /etc/VPS-SN/MEUIPvps ]]; then
+        IP="$(cat /etc/VPS-SN/MEUIPvps)"
     else
         MEU_IP=$(wget -qO- ifconfig.me)
-        echo "$MEU_IP" >/etc/sinnombre-vps-master/MEUIPvps
+        echo "$MEU_IP" >/etc/VPS-SN/MEUIPvps
     fi
 }
 fun_eth() {
@@ -1132,7 +1132,7 @@ monservi_fun() {
     PIDVRF3="$(ps aux | grep "${SCPdir}/menu monitorservi" | grep -v grep | awk '{print $2}')"
     PIDVRF5="$(ps aux | grep "${SCPdir}/menu moni2" | grep -v grep | awk '{print $2}')"
     if [[ -z $PIDVRF3 ]]; then
-        sed -i '5a\screen -dmS very3 /etc/sinnombre-vps-master/menu monitorservi' /bin/resetsshdrop
+        sed -i '5a\screen -dmS very3 /etc/VPS-SN/menu monitorservi' /bin/resetsshdrop
         msg -bar
         echo -e "\033[1;34m          ¿Monitor SSH/SSHD Protocol?"
         msg -bar
@@ -1223,19 +1223,19 @@ if [[ "$1" = "moni2" ]]; then
     exit
 fi
 SSHN="$(grep -c home /etc/passwd)"
-echo "${SSHN}" | bc >/etc/sinnombre-vps-master/controller/SSH20.log
-SSH3="$(less /etc/sinnombre-vps-master/controller/SSH20.log)"
+echo "${SSHN}" | bc >/etc/VPS-SN/controller/SSH20.log
+SSH3="$(less /etc/VPS-SN/controller/SSH20.log)"
 SSH4="$(echo $SSH3)"
 user_info=$(cd /usr/local/shadowsocksr &>/dev/null && python mujson_mgr.py -l)
 user_total=$(echo "${user_info}" | wc -l)
-[[ ! -e /etc/sinnombre-vps-master/RegV2ray ]] && touch /etc/sinnombre-vps-master/RegV2ray
-vray=$(cat /etc/sinnombre-vps-master/RegV2ray | wc -l)
+[[ ! -e /etc/VPS-SN/RegV2ray ]] && touch /etc/VPS-SN/RegV2ray
+vray=$(cat /etc/VPS-SN/RegV2ray | wc -l)
 on="\033[1;92m[ON]" && off="\033[1;31m[OFF]"
 echo -e "\033[1;97m   SSH REG:\033[1;92m $SSH4 \033[1;97m   SS-SSRR REG:\033[1;92m $user_total \033[1;97m   V2RAY REG:\e[32m $vray"
 VERY="$(ps aux | grep "${SCPusr}/usercodes verificar" | grep -v grep)"
 VERY2="$(ps aux | grep "${SCPusr}/usercodes desbloqueo" | grep -v grep)"
 VERY3="$(ps aux | grep "${SCPdir}/menu monitorservi" | grep -v grep)"
-limseg="$(less /etc/sinnombre-vps-master/controller/tiemlim.log)"
+limseg="$(less /etc/VPS-SN/controller/tiemlim.log)"
 [[ -z ${VERY} ]] && verificar="\033[1;31m[OFF]" || verificar="\033[1;32m[ON] "
 [[ -z ${VERY2} ]] && desbloqueo="\033[1;31m[OFF]" || desbloqueo="\033[1;32m[ON] "
 [[ -z ${VERY3} ]] && monitorservi="\033[1;31m[OFF]" || monitorservi="\033[1;32m[ON]"

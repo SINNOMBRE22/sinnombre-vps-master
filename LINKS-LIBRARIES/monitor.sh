@@ -18,9 +18,9 @@ EstadoServicio () {
     else
         echo "<p>Service status $1 is || <span class='detenido'> OFF | REBOOTING</span>.</p>" >> $DIR/$ARCHIVO
 		service $1 restart &
-NOM=`less /etc/sinnombre-vps-master/controller/nombre.log` > /dev/null 2>&1
+NOM=`less /etc/VPS-SN/controller/nombre.log` > /dev/null 2>&1
 NOM1=`echo $NOM` > /dev/null 2>&1
-IDB=`less /etc/sinnombre-vps-master/controller/IDT.log` > /dev/null 2>&1
+IDB=`less /etc/VPS-SN/controller/IDT.log` > /dev/null 2>&1
 IDB1=`echo $IDB` > /dev/null 2>&1
 KEY="862633455:AAEgkSywlAHQQOMXzGHJ13gctV6wO1hm25Y"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
@@ -40,7 +40,7 @@ echo "
   <meta charset='UTF-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <meta http-equiv='X-UA-Compatible' content='ie=edge'>
-  <title>sinnombre-vps-master Service Monitor</title>
+  <title>VPS-SN Service Monitor</title>
   <link rel='stylesheet' href='estilos.css'>
 </head>
 <body>
@@ -71,9 +71,9 @@ echo "<p>Badvpn service status is ||  $badvpn </span>.</p> " >> $DIR/$ARCHIVO
 PIDVRF3="$(ps aux|grep badvpn |grep -v grep|awk '{print $2}')"
 if [[ -z $PIDVRF3 ]]; then
 screen -dmS badvpn2 /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10
-NOM=`less /etc/sinnombre-vps-master/controller/nombre.log` > /dev/null 2>&1
+NOM=`less /etc/VPS-SN/controller/nombre.log` > /dev/null 2>&1
 NOM1=`echo $NOM` > /dev/null 2>&1
-IDB=`less /etc/sinnombre-vps-master/controller/IDT.log` > /dev/null 2>&1
+IDB=`less /etc/VPS-SN/controller/IDT.log` > /dev/null 2>&1
 IDB1=`echo $IDB` > /dev/null 2>&1
 KEY="862633455:AAEgkSywlAHQQOMXzGHJ13gctV6wO1hm25Y"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
@@ -89,14 +89,14 @@ fi
 
 #SERVICE PYTHON DIREC
 ureset_python () {
-for port in $(cat /etc/sinnombre-vps-master/PortPD.log| grep -v "nobody" |cut -d' ' -f1)
+for port in $(cat /etc/VPS-SN/PortPD.log| grep -v "nobody" |cut -d' ' -f1)
 do
 PIDVRF3="$(ps aux|grep pydic-"$port" |grep -v grep|awk '{print $2}')"
 if [[ -z $PIDVRF3 ]]; then
-screen -dmS pydic-"$port" python /etc/sinnombre-vps-master/protocolos/PDirect.py "$port"
-NOM=`less /etc/sinnombre-vps-master/controller/nombre.log` > /dev/null 2>&1
+screen -dmS pydic-"$port" python /etc/VPS-SN/protocolos/PDirect.py "$port"
+NOM=`less /etc/VPS-SN/controller/nombre.log` > /dev/null 2>&1
 NOM1=`echo $NOM` > /dev/null 2>&1
-IDB=`less /etc/sinnombre-vps-master/controller/IDT.log` > /dev/null 2>&1
+IDB=`less /etc/VPS-SN/controller/IDT.log` > /dev/null 2>&1
 IDB1=`echo $IDB` > /dev/null 2>&1
 KEY="862633455:AAEgkSywlAHQQOMXzGHJ13gctV6wO1hm25Y"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
@@ -114,14 +114,14 @@ done
 
 #SERVICE PY+SSL
 ureset_pyssl () {
-for port in $(cat /etc/sinnombre-vps-master/PySSL.log| grep -v "nobody" |cut -d' ' -f1)
+for port in $(cat /etc/VPS-SN/PySSL.log| grep -v "nobody" |cut -d' ' -f1)
 do
 PIDVRF3="$(ps aux|grep pyssl-"$port" |grep -v grep|awk '{print $2}')"
 if [[ -z $PIDVRF3 ]]; then
-screen -dmS pyssl-"$port" python /etc/sinnombre-vps-master/protocolos/python.py "$port"
-NOM=`less /etc/sinnombre-vps-master/controller/nombre.log` > /dev/null 2>&1
+screen -dmS pyssl-"$port" python /etc/VPS-SN/protocolos/python.py "$port"
+NOM=`less /etc/VPS-SN/controller/nombre.log` > /dev/null 2>&1
 NOM1=`echo $NOM` > /dev/null 2>&1
-IDB=`less /etc/sinnombre-vps-master/controller/IDT.log` > /dev/null 2>&1
+IDB=`less /etc/VPS-SN/controller/IDT.log` > /dev/null 2>&1
 IDB1=`echo $IDB` > /dev/null 2>&1
 KEY="862633455:AAEgkSywlAHQQOMXzGHJ13gctV6wO1hm25Y"
 URL="https://api.telegram.org/bot$KEY/sendMessage"

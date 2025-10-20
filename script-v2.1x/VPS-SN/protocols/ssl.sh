@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 clear
-SCPdir="/etc/sinnombre-vps-master"
+SCPdir="/etc/VPS-SN"
 SCPfrm="${SCPdir}/tools" && [[ ! -d ${SCPfrm} ]] && exit
 SCPinst="${SCPdir}/protocols"&& [[ ! -d ${SCPinst} ]] && exit
 declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m" )
@@ -164,7 +164,7 @@ msg -bar
  echo -e "\033[1;97m Activating Python Direct 80\n"
  fun_bar "apt-get install python -y" 
  sleep 3  
- screen -dmS pydic-80 python ${SCPinst}/python.py 80 "sinnombre-vps-master" && echo "80 sinnombre-vps-master" >> /etc/sinnombre-vps-master/PySSL.log
+ screen -dmS pydic-80 python ${SCPinst}/python.py 80 "VPS-SN" && echo "80 VPS-SN" >> /etc/VPS-SN/PySSL.log
  msg -bar
  } 
  install_ssl(){  
@@ -221,7 +221,7 @@ ssl_stunel_2
 msg -bar
 ssl_stunel_3
 msg -ne "Enter To Continue" && read enter
-/etc/sinnombre-vps-master/protocols/ssl.sh
+/etc/VPS-SN/protocols/ssl.sh
 ;;
 4)
 exit

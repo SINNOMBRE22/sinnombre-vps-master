@@ -1,8 +1,8 @@
-# sinnombre-vps-master By SINNOMBRE22 AGN ( MOD ENGLISH )
+# VPS-SN By SINNOMBRE22 AGN ( MOD ENGLISH )
 ```
-* sinnombre-vps-master (Final Version OF VPS-MX 8.5x)
+* VPS-SN (Final Version OF VPS-MX 8.5x)
 ```
-![logo](https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/sinnombre-vps-master.png)
+![logo](https://raw.githubusercontent.com/SINNOMBRE22/VPS-SN/master/VPS-SN.png)
 
 ```
 # SCRIPT VPS•AGN ® VPS Script Manager
@@ -46,7 +46,7 @@ BOT MANAGER:
 
 # Installation
 ```
-rm -rf install-without-key.sh; apt update; apt install curl; apt install bc; wget https://github.com/SINNOMBRE22/sinnombre-vps-master/raw/main/installer/install-without-key.sh; chmod 777 install-without-key.sh; ./install-without-key.sh --start
+rm -rf install-without-key.sh; apt update; apt install curl; apt install bc; wget https://github.com/SINNOMBRE22/VPS-SN/raw/main/installer/install-without-key.sh; chmod 777 install-without-key.sh; ./install-without-key.sh --start
 
 ```
 

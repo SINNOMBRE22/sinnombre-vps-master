@@ -1,7 +1,7 @@
 #!/bin/bash
-NOM="$(less /etc/sinnombre-vps-master/controller/nombre.log)"
+NOM="$(less /etc/VPS-SN/controller/nombre.log)"
 NOM1="$(echo $NOM)"
-IDB=`less /etc/sinnombre-vps-master/controller/IDT.log` > /dev/null 2>&1
+IDB=`less /etc/VPS-SN/controller/IDT.log` > /dev/null 2>&1
 IDB1=`echo $IDB` > /dev/null 2>&1
 KEY="862633455:AAEgkSywlAHQQOMXzGHJ13gctV6wO1hm25Y"
 URL="https://api.telegram.org/bot$KEY/sendMessage"

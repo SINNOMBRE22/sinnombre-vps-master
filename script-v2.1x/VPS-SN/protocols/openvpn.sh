@@ -3,7 +3,7 @@
 clear
 clear
 msg -bar
-SCPdir="/etc/sinnombre-vps-master" && [[ ! -d ${SCPdir} ]] && exit 1
+SCPdir="/etc/VPS-SN" && [[ ! -d ${SCPdir} ]] && exit 1
 SCPfrm="${SCPdir}/tools" && [[ ! -d ${SCPfrm} ]] && exit
 SCPinst="${SCPdir}/protocols" && [[ ! -d ${SCPinst} ]] && exit
 SCPidioma="${SCPdir}/idioma" && [[ ! -e ${SCPidioma} ]] && touch ${SCPidioma}
@@ -83,13 +83,13 @@ case $1 in
 esac
 }
 meu_ip () {
-if [[ -e /etc/sinnombre-vps-master/MEUIPvps ]]; then
-echo "$(cat /etc/sinnombre-vps-master/MEUIPvps)"
+if [[ -e /etc/VPS-SN/MEUIPvps ]]; then
+echo "$(cat /etc/VPS-SN/MEUIPvps)"
 else
 MEU_IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
 MEU_IP2=$(wget -qO- ipv4.icanhazip.com)
 [[ "$MEU_IP" != "$MEU_IP2" ]] && echo "$MEU_IP2" || echo "$MEU_IP"
-echo "$MEU_IP" > /etc/sinnombre-vps-master/MEUIPvps
+echo "$MEU_IP" > /etc/VPS-SN/MEUIPvps
 fi
 }
 IP="$(meu_ip)"
@@ -99,7 +99,7 @@ msg -bar3
 clear
 msg -bar
 msg -tit
-echo -e "\033[1;32m     OPENVPN INSTALLER | sinnombre-vps-master By @KhaledAGN"
+echo -e "\033[1;32m     OPENVPN INSTALLER | VPS-SN By @KhaledAGN"
 msg -bar
 	# OpenVPN setup and first user creation
 echo -e "\033[1;97mCertain parameters are needed to configure OpenVPN."
@@ -340,7 +340,7 @@ exit 0' > $RCLOCAL
 		IP=$PUBLICIP
 	fi
 	# 
-	echo "# OVPN_ACCESS_SERVER_PROFILE=sinnombre-vps-master
+	echo "# OVPN_ACCESS_SERVER_PROFILE=VPS-SN
 client
 dev tun
 proto $PROTOCOL
@@ -421,7 +421,7 @@ wget -q -O - https://swupdate.openvpn.net/repos/repo-public.gpg | apt-key add - 
 fi
 }
 coleta_variaveis () {
-echo -e "\033[1;32m     OPENVPN INSTALLER | sinnombre-vps-master By @KhaledAGN"
+echo -e "\033[1;32m     OPENVPN INSTALLER | VPS-SN By @KhaledAGN"
 msg -bar
 msg -ne " Confirm your IP"; read -p ": " -e -i $IP ip
 msg -bar
@@ -602,7 +602,7 @@ read -p " Confirm the port(Proxy) " -e -i 80 PPROXY
 teste_porta $PPROXY
 done
 cat > /etc/openvpn/client-common.txt <<EOF
-# OVPN_ACCESS_SERVER_PROFILE=sinnombre-vps-master
+# OVPN_ACCESS_SERVER_PROFILE=VPS-SN
 client
 nobind
 dev tun

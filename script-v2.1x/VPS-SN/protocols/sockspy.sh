@@ -2,7 +2,7 @@
 #25/01/2021 by @KhaledAGN
 clear
 clear
-SCPdir="/etc/sinnombre-vps-master"
+SCPdir="/etc/VPS-SN"
 SCPfrm="${SCPdir}/tools" && [[ ! -d ${SCPfrm} ]] && exit
 SCPinst="${SCPdir}/protocols"&& [[ ! -d ${SCPinst} ]] && exit
 declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m" )
@@ -27,7 +27,7 @@ tcpbypass_fun () {
 [[ -d $HOME/socks ]] && rm -rf $HOME/socks > /dev/null 2>&1
 cd $HOME && mkdir socks > /dev/null 2>&1
 cd socks
-patch="https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/LINKS-LIBRARIES/backsocz.zip"
+patch="https://raw.githubusercontent.com/SINNOMBRE22/VPS-SN/master/LINKS-LIBRARIES/backsocz.zip"
 arq="backsocz.zip"
 wget $patch > /dev/null 2>&1
 unzip $arq > /dev/null 2>&1
@@ -69,7 +69,7 @@ msg -bar
 echo -ne "\033[1;97mHeader response (200,101,404,500,etc): \033[1;92m" && read rescabeza
 msg -bar
 (
-less << PYTHON  > /etc/sinnombre-vps-master/protocols/PDirect.py
+less << PYTHON  > /etc/VPS-SN/protocols/PDirect.py
 import socket, threading, thread, select, signal, sys, time, getopt
 
 # Listen
@@ -341,9 +341,9 @@ if __name__ == '__main__':
 PYTHON
 ) > $HOME/proxy.log
 
-chmod +x /etc/sinnombre-vps-master/protocols/PDirect.py
+chmod +x /etc/VPS-SN/protocols/PDirect.py
 
-screen -dmS pydic-"$porta_socket" python ${SCPinst}/PDirect.py "$porta_socket" "$texto_soket" && echo ""$porta_socket" "$texto_soket"" >> /etc/sinnombre-vps-master/PortPD.log
+screen -dmS pydic-"$porta_socket" python ${SCPinst}/PDirect.py "$porta_socket" "$texto_soket" && echo ""$porta_socket" "$texto_soket"" >> /etc/VPS-SN/PortPD.log
 }
 
 
@@ -368,8 +368,8 @@ pidproxy6=$(ps x | grep "scktcheck" | grep -v "grep" | awk -F "pts" '{print $1}'
 pidproxy7=$(ps x | grep "python.py" | grep -v "grep" | awk -F "pts" '{print $1}') && [[ ! -z $pidproxy7 ]] && pid_kill $pidproxy7
 echo -e "\033[1;91m  $(fun_trans  "Socks ARRESTED")"
 msg -bar
-rm -rf /etc/sinnombre-vps-master/PortPD.log
-echo "" > /etc/sinnombre-vps-master/PortPD.log
+rm -rf /etc/VPS-SN/PortPD.log
+echo "" > /etc/VPS-SN/PortPD.log
 exit 0
 }
 iniciarsocks () {
@@ -381,7 +381,7 @@ pidproxy5=$(ps x | grep "PGet.py" | grep -v "grep" | awk -F "pts" '{print $1}') 
 pidproxy6=$(ps x | grep "scktcheck" | grep -v "grep" | awk -F "pts" '{print $1}') && [[ ! -z $pidproxy6 ]] && P6="\033[1;32m[ON]" || P6="\033[1;31m[OFF]"
 msg -bar 
 msg -tit
-msg -ama "   INSTALLER OF PROXY'S sinnombre-vps-master By MOD @KhaledAGN"
+msg -ama "   INSTALLER OF PROXY'S VPS-SN By MOD @KhaledAGN"
 msg -bar
 echo -e "${cor[4]} [1] $(msg -verm2 "==>>") \033[1;97m$(fun_trans  "Proxy Python SIMPLE")\033[1;97m ------------- $P1"
 echo -e "${cor[4]} [2] $(msg -verm2 "==>>") \033[1;97m$(fun_trans  "Proxy Python SECURED")\033[1;97m ------------- $P2"

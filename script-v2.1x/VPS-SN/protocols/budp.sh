@@ -2,7 +2,7 @@
 clear
 clear
 declare -A cor=([0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m")
-SCPdir="/etc/sinnombre-vps-master"
+SCPdir="/etc/VPS-SN"
 SCPfrm="${SCPdir}/tools" && [[ ! -d ${SCPfrm} ]] && exit
 SCPinst="${SCPdir}/protocols" && [[ ! -d ${SCPinst} ]] && exit
 
@@ -27,7 +27,7 @@ BadVPN() {
 	pid_badvpn=$(ps x | grep badvpn | grep -v grep | awk '{print $1}')
 	#if [ "$pid_badvpn" = "" ]; then
 	if [[ ! -e /bin/badvpn-udpgw ]]; then
-		wget -O /bin/badvpn-udpgw https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/LINKS-LIBRARIES/badvpn-udpgw &>/dev/null
+		wget -O /bin/badvpn-udpgw https://raw.githubusercontent.com/SINNOMBRE22/VPS-SN/master/LINKS-LIBRARIES/badvpn-udpgw &>/dev/null
 		chmod 777 /bin/badvpn-udpgw
 	fi
 	#fix rclocal

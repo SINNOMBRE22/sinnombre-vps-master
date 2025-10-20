@@ -3,7 +3,7 @@
 clear
 clear
 declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m" )
-SCPdir="/etc/sinnombre-vps-master"
+SCPdir="/etc/VPS-SN"
 SCPfrm="${SCPdir}/tools" && [[ ! -d ${SCPfrm} ]] && exit
 SCPinst="${SCPdir}/protocols"&& [[ ! -d ${SCPinst} ]] && exit
 mportas () {
@@ -86,7 +86,7 @@ read opcao
 case $opcao in
 1)
 msg -bar
-wget --no-check-certificate -O Instalador-Shadowsocks-libev.sh https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/LINKS-LIBRARIES/Instalador-Shadowsocks-libev.sh > /dev/null 2>&1
+wget --no-check-certificate -O Instalador-Shadowsocks-libev.sh https://raw.githubusercontent.com/SINNOMBRE22/VPS-SN/master/LINKS-LIBRARIES/Instalador-Shadowsocks-libev.sh > /dev/null 2>&1
 chmod +x Instalador-Shadowsocks-libev.sh
 ./Instalador-Shadowsocks-libev.sh 2>&1 | tee Instalador-Shadowsocks-libev.log
 
@@ -95,7 +95,7 @@ chmod +x Instalador-Shadowsocks-libev.sh
 msg -bar
 echo -e "\033[1;93m  Uninstall  ..."
 msg -bar
-wget --no-check-certificate -O Instalador-Shadowsocks-libev.sh https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/LINKS-LIBRARIES/Instalador-Shadowsocks-libev.sh > /dev/null 2>&1
+wget --no-check-certificate -O Instalador-Shadowsocks-libev.sh https://raw.githubusercontent.com/SINNOMBRE22/VPS-SN/master/LINKS-LIBRARIES/Instalador-Shadowsocks-libev.sh > /dev/null 2>&1
 chmod +x Instalador-Shadowsocks-libev.sh
 ./Instalador-Shadowsocks-libev.sh uninstall
 rm -rf Instalador-Shadowsocks-libev.sh
