@@ -27,7 +27,7 @@ tcpbypass_fun () {
 [[ -d $HOME/socks ]] && rm -rf $HOME/socks > /dev/null 2>&1
 cd $HOME && mkdir socks > /dev/null 2>&1
 cd socks
-patch="https://raw.githubusercontent.com/khaledagn/sinnombre-vps-master_English_Official/master/LINKS-LIBRARIES/backsocz.zip"
+patch="https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/LINKS-LIBRARIES/backsocz.zip"
 arq="backsocz.zip"
 wget $patch > /dev/null 2>&1
 unzip $arq > /dev/null 2>&1

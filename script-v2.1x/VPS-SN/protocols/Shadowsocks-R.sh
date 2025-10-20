@@ -86,7 +86,7 @@ read opcao
 case $opcao in
 1)
 msg -bar
-wget --no-check-certificate -O Instalador-Shadowsocks-R.sh https://raw.githubusercontent.com/khaledagn/sinnombre-vps-master_English_Official/master/LINKS-LIBRARIES/Instalador-Shadowsocks-R.sh > /dev/null 2>&1
+wget --no-check-certificate -O Instalador-Shadowsocks-R.sh https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/LINKS-LIBRARIES/Instalador-Shadowsocks-R.sh > /dev/null 2>&1
 chmod +x Instalador-Shadowsocks-R.sh
 ./Instalador-Shadowsocks-R.sh 2>&1 
 
@@ -95,7 +95,7 @@ chmod +x Instalador-Shadowsocks-R.sh
 msg -bar
 echo -e "\033[1;93m  Uninstall  ..."
 msg -bar
-wget --no-check-certificate -O Instalador-Shadowsocks-R.sh https://raw.githubusercontent.com/khaledagn/sinnombre-vps-master_English_Official/master/LINKS-LIBRARIES/Instalador-Shadowsocks-R.sh > /dev/null 2>&1
+wget --no-check-certificate -O Instalador-Shadowsocks-R.sh https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/LINKS-LIBRARIES/Instalador-Shadowsocks-R.sh > /dev/null 2>&1
 chmod +x Instalador-Shadowsocks-R.sh
 ./Instalador-Shadowsocks-R.sh uninstall
 rm -rf Instalador-Shadowsocks-R.sh

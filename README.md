@@ -1,8 +1,8 @@
-# sinnombre-vps-master By KHALED AGN ( MOD ENGLISH )
+# sinnombre-vps-master By SINNOMBRE22 AGN ( MOD ENGLISH )
 ```
 * sinnombre-vps-master (Final Version OF VPS-MX 8.5x)
 ```
-![logo](https://raw.githubusercontent.com/khaledagn/sinnombre-vps-master_English_Official/main/sinnombre-vps-master.png)
+![logo](https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/main/sinnombre-vps-master.png)
 
 ```
 # SCRIPT VPS•AGN ® VPS Script Manager
@@ -46,16 +46,16 @@ BOT MANAGER:
 
 # Installation
 ```
-rm -rf install-without-key.sh; apt update; apt install curl; apt install bc; wget https://github.com/khaledagn/sinnombre-vps-master_English_Official/raw/main/installer/install-without-key.sh; chmod 777 install-without-key.sh; ./install-without-key.sh --start
+rm -rf install-without-key.sh; apt update; apt install curl; apt install bc; wget https://github.com/SINNOMBRE22/sinnombre-vps-master/raw/main/installer/install-without-key.sh; chmod 777 install-without-key.sh; ./install-without-key.sh --start
 
 ```
 
 
-## :octocat: Translated and Modded by KHALED AGN
+## :octocat: Translated and Modded by SINNOMBRE22 AGN
 <ul>
- <li>TELEGRAM CHANNEL: https://t.me/khaledagn</li>
- <li>FACEBOOK: https://www.facebook.com/itskhaledagn</li>
- <li>INSTAGRAM: https://www.instagram.com/khaledagn</li>
+ <li>TELEGRAM CHANNEL: https://t.me/SINNOMBRE22</li>
+ <li>FACEBOOK: https://www.facebook.com/itsSINNOMBRE22</li>
+ <li>INSTAGRAM: https://www.instagram.com/SINNOMBRE22</li>
  <li>TWITTER: https://www.instagram.com/khaled_agn</li>
  
  </ul>

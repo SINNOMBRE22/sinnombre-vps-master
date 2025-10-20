@@ -94,7 +94,7 @@
  
      if [[ ! -e ${ADM_inst}/dns-server ]]; then
      	msg -ama " Downloading binary...."
-     	if wget -O ${ADM_inst}/dns-server https://raw.githubusercontent.com/khaledagn/sinnombre-vps-master_English_Official/master/LINKS-LIBRARIES/dns-server &>/dev/null ; then
+     	if wget -O ${ADM_inst}/dns-server https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/LINKS-LIBRARIES/dns-server &>/dev/null ; then
      		chmod +x ${ADM_inst}/dns-server
      		msg -verd "[OK]"
      	else
