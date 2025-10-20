@@ -15,7 +15,6 @@ echo "$v1" >/etc/versin_script
 [[ ! -e /etc/versin_script ]] && echo 1 >/etc/versin_script
 v22=$(cat /etc/versin_script)
 vesaoSCT="\033[1;31m [ \033[1;32m($v22)\033[1;97m\033[1;31m ]"
-
 ### COLORS AND BAR
 msg() {
    BRAN='\033[1;37m' && RED='\e[31m' && GREEN='\e[32m' && YELLOW='\e[33m'
@@ -32,7 +31,6 @@ msg() {
   "-bar2" | "-bar") cor="${RED}————————————————————————————————————————————————————" && echo -e "${SEMCOR}${cor}${SEMCOR}" ;;
   esac
 }
-
 fun_bar() {
   comando="$1"
   _=$(
@@ -90,6 +88,8 @@ title() {
   msg -bar
 }
 
+
+
 stop_install() {
   title "INSTALLATION CANCELED"
   exit
@@ -118,7 +118,7 @@ os_system() {
 }
 
 repo() {
-  link="https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/script-v2.1x/20.04.list"
+  link="https://raw.githubusercontent.com/khaledagn/Multi-Script/main/Source-List/20.04.list"
   case $1 in
   8 | 9 | 10 | 11 | 16.04 | 18.04 | 20.04 | 20.10 | 21.04 | 21.10 | 22.04) wget -O /etc/apt/sources.list ${link} &>/dev/null ;;
   esac
@@ -202,6 +202,36 @@ install_continue() {
   read -t 60 -n 1 -rsp $'\033[1;39m       << Press enter to continue >>\n'
 }
 
+while :; do
+  case $1 in
+  -s | --start) install_start && post_reboot && time_reboot "15" ;;
+  -c | --continue)
+    #rm /root/install-without-key.sh &>/dev/null
+    sed -i '/installer/d' /root/.bashrc
+    install_continue
+    break
+    ;;
+  # -u | --update)
+  #   install_start
+  #   install_continue
+  #   break
+  # ;;
+  *) exit ;;
+  esac
+done
+
+clear && clear
+msg -bar2
+echo -e " \e[5m\033[1;100m   =====>> ►► 🐲 VPS-SN - SCRIPT  🐲 ◄◄ <<=====   \033[1;37m"
+msg -bar2
+print_center -ama "AVAILABLE SCRIPT LIST"
+msg -bar
+#-BASH SOPORTE ONLINE
+wget https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/LINKS-LIBRARIES/SPR.sh -O /usr/bin/SPR >/dev/null 2>&1
+chmod +x /usr/bin/SPR
+
+
+#VPS-SN 8.6 OFFICIAL
 install_official() {
   clear && clear
   msg -bar
@@ -220,7 +250,7 @@ install_official() {
   chmod -R 755 /etc/VPS-SN
   rm -rf /etc/VPS-SN/MEUIPvps
   echo "/etc/VPS-SN/menu" >/usr/bin/menu && chmod +x /usr/bin/menu
-  echo "/etc/VPS-SN/menu" >/usr/bin/VPS && chmod +x /usr/bin/VPS
+  echo "/etc/VPS-SN/menu" >/usr/bin/VPSSN && chmod +x /usr/bin/VPSSN
   wget https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/LINKS-LIBRARIES/monitor.sh -P /bin/
   echo "$slogan" >/etc/VPS-SN/message.txt
   [[ ! -d /usr/local/lib ]] && mkdir /usr/local/lib
@@ -251,7 +281,7 @@ install_official() {
   v1=$(curl -sSL "https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/script-v2.1x/Version")
   echo "$v1" >/etc/versin_script
   wget -O /etc/versin_script_new https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/script-v2.1x/Version &>/dev/null
-  echo '# !/bin/sh -e' >/etc/rc.local
+  echo '#!/bin/sh -e' >/etc/rc.local
   sudo chmod +x /etc/rc.local
   echo "sudo resetsshdrop" >>/etc/rc.local
   echo "sleep 2s" >>/etc/rc.local
@@ -271,7 +301,7 @@ install_official() {
   echo 'echo -e "\t\033[92mRESELLER : $mess1 "' >>.bashrc
   echo 'echo -e "\t\e[1;33mVERSION: \e[1;31m$(cat /etc/versin_script_new)"' >>.bashrc
   echo 'echo "" ' >>.bashrc
-  echo 'echo -e "\t\033[97mTO DISPLAY BASH PANEL TYPE: sudo VPS or menu "' >>.bashrc
+  echo 'echo -e "\t\033[97mTO DISPLAY BASH PANEL TYPE: sudo VPSSN or menu "' >>.bashrc
   echo 'echo ""' >>.bashrc
   rm -rf /usr/bin/pytransform &>/dev/null
   rm -rf VPS-SN.sh
@@ -284,10 +314,10 @@ install_official() {
   echo -e "                      \033[1;41m  menu  \033[0;37m" && msg -bar2
 }
 
-# MENUS
+#MENUS
 /bin/cp /etc/skel/.bashrc ~/
 /bin/cp /etc/skel/.bashrc /etc/bash.bashrc
-echo -ne " \e[1;93m [\e[1;32m1\e[1;93m]\033[1;31m > \e[1;97m INSTALL 8.6 OFFICIAL \e[97m \n"
+echo -ne " \e[1;93m [\e[1;32m1\e[1;93m]\033[1;31m > \e[1;97m INSTALL 8.5x OFFICIAL \e[97m \n"
 msg -bar
 echo -ne "\033[1;97mEnter only the number according to your answer:\e[32m "
 read opcao
