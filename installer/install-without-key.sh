@@ -126,8 +126,8 @@ repo() {
 }
 
 dependencias() {
-  soft="sudo bsdmainutils zip unzip ufw curl python python3 python3-pip openssl screen cron iptables lsof pv boxes nano at mlocate gawk grep bc jq curl npm nodejs socat netcat netcat-traditional net-t[...]
-
+  soft="sudo bsdmainutils zip unzip ufw curl python python3 python3-pip openssl screen cron iptables lsof pv boxes nano at mlocate gawk grep bc jq curl npm nodejs socat netcat netcat-traditional ..."
+  
   for i in $soft; do
     leng="${#i}"
     puntos=$((21 - $leng))
@@ -158,7 +158,7 @@ dependencias() {
 }
 
 post_reboot() {
-  echo 'wget -O /root/install.sh "https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/installer/install-without-key.sh"; clear; sleep 2; chmod +x /root/install.sh; /root/install.[...]'
+  echo 'wget -O /root/install.sh "https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/installer/install-without-key.sh"; clear; sleep 2; chmod +x /root/install.sh; /root/install.sh -c' >/root/install.sh
   title -verd "ACTUALIZACIÓN DEL SISTEMA COMPLETADA"
   print_center -ama "La instalación continuará\ndespués de reiniciar!!!"
   msg -bar
@@ -288,7 +288,7 @@ install_official() {
   echo "sudo resetsshdrop" >>/etc/rc.local
   echo "sleep 2s" >>/etc/rc.local
   echo "exit 0" >>/etc/rc.local
- # Reemplazar las múltiples echos que agregan contenido a .bashrc por este here-doc seguro.
+  # Reemplazar las múltiples echos que agregan contenido a .bashrc por este here-doc seguro.
 cat >> .bashrc <<'EOF'
 clear
 echo ""
