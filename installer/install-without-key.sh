@@ -222,7 +222,7 @@ done
 
 clear && clear
 msg -bar2
-echo -e " \e[5m\033[1;100m   =====>> ►► 🐲 sinnombre-vps-master - SCRIPT  🐲 ◄◄ <<=====   \033[1;37m"
+echo -e " \e[5m\033[1;100m   =====>> ►► 🐲 VPS-SN - SCRIPT  🐲 ◄◄ <<=====   \033[1;37m"
 msg -bar2
 print_center -ama "AVAILABLE SCRIPT LIST"
 msg -bar
@@ -231,7 +231,7 @@ wget https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/L
 chmod +x /usr/bin/SPR
 
 
-# sinnombre-vps-master 8.6 OFFICIAL
+# VPS-SN 8.6 OFFICIAL
 install_official() {
   clear && clear
   msg -bar
@@ -240,19 +240,19 @@ install_official() {
   echo -e "$slogan"
   msg -bar
   clear && clear
-  mkdir /etc/sinnombre-vps-master >/dev/null 2>&1
+  mkdir /etc/VPS-SN >/dev/null 2>&1
   cd /etc
   wget https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/script-v2.1x/VPS-SN.tar.xz >/dev/null 2>&1
   tar -xf VPS-SN.tar.xz >/dev/null 2>&1
   chmod +x VPS-SN.tar.xz >/dev/null 2>&1
   rm -rf VPS-SN.tar.xz
   cd
-  chmod -R 755 /etc/sinnombre-vps-master
-  rm -rf /etc/sinnombre-vps-master/MEUIPvps
-  echo "/etc/sinnombre-vps-master/menu" >/usr/bin/menu && chmod +x /usr/bin/menu
-  echo "/etc/sinnombre-vps-master/menu" >/usr/bin/VPSAGN && chmod +x /usr/bin/VPSAGN
+  chmod -R 755 /etc/VPS-SN
+  rm -rf /etc/VPS-SN/MEUIPvps
+  echo "/etc/VPS-SN/menu" >/usr/bin/menu && chmod +x /usr/bin/menu
+  echo "/etc/VPS-SN/menu" >/usr/bin/VPS && chmod +x /usr/bin/VPS
   wget https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/LINKS-LIBRARIES/monitor.sh -P /bin/
-  echo "$slogan" >/etc/sinnombre-vps-master/message.txt
+  echo "$slogan" >/etc/VPS-SN/message.txt
   [[ ! -d /usr/local/lib ]] && mkdir /usr/local/lib
   [[ ! -d /usr/local/lib/ubuntn ]] && mkdir /usr/local/lib/ubuntn
   [[ ! -d /usr/local/lib/ubuntn/apache ]] && mkdir /usr/local/lib/ubuntn/apache
@@ -262,15 +262,15 @@ install_official() {
   [[ ! -d /usr/share/mediaptre/local ]] && mkdir /usr/share/mediaptre/local
   [[ ! -d /usr/share/mediaptre/local/log ]] && mkdir /usr/share/mediaptre/local/log
   [[ ! -d /usr/share/mediaptre/local/log/lognull ]] && mkdir /usr/share/mediaptre/local/log/lognull
-  [[ ! -d /etc/sinnombre-vps-master/B-sinnombre-vps-masteruser ]] && mkdir /etc/sinnombre-vps-master/B-sinnombre-vps-masteruser
+  [[ ! -d /etc/VPS-SN/B-VPS-SNuser ]] && mkdir /etc/VPS-SN/B-VPS-SNuser
   [[ ! -d /usr/local/protec ]] && mkdir /usr/local/protec
   [[ ! -d /usr/local/protec/rip ]] && mkdir /usr/local/protec/rip
   [[ ! -d /etc/protecbin ]] && mkdir /etc/protecbin
   cd
-  [[ ! -d /etc/sinnombre-vps-master/v2ray ]] && mkdir /etc/sinnombre-vps-master/v2ray
-  [[ ! -d /etc/sinnombre-vps-master/Slow ]] && mkdir /etc/sinnombre-vps-master/Slow
-  [[ ! -d /etc/sinnombre-vps-master/Slow/install ]] && mkdir /etc/sinnombre-vps-master/Slow/install
-  [[ ! -d /etc/sinnombre-vps-master/Slow/Key ]] && mkdir /etc/sinnombre-vps-master/Slow/Key
+  [[ ! -d /etc/VPS-SN/v2ray ]] && mkdir /etc/VPS-SN/v2ray
+  [[ ! -d /etc/VPS-SN/Slow ]] && mkdir /etc/VPS-SN/Slow
+  [[ ! -d /etc/VPS-SN/Slow/install ]] && mkdir /etc/VPS-SN/Slow/install
+  [[ ! -d /etc/VPS-SN/Slow/Key ]] && mkdir /etc/VPS-SN/Slow/Key
   touch /usr/share/lognull &>/dev/null
   wget -O /bin/resetsshdrop https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/LINKS-LIBRARIES/resetsshdrop &>/dev/null
   chmod +x /bin/resetsshdrop
@@ -296,7 +296,7 @@ install_official() {
   echo 'echo -e "\t\033[91m     \/   |_|    |_____/    /_/    \_\_____|_| \_|" ' >>.bashrc
   echo 'wget -O /etc/versin_script_new https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/script-v2.1x/Version &>/dev/null' >>.bashrc
   echo 'echo "" ' >>.bashrc
-  echo 'mess1="$(less /etc/sinnombre-vps-master/message.txt)" ' >>.bashrc
+  echo 'mess1="$(less /etc/VPS-SN/message.txt)" ' >>.bashrc
   echo 'echo "" ' >>.bashrc
   echo 'echo -e "\t\033[92mRESELLER : $mess1 "' >>.bashrc
   echo 'echo -e "\t\e[1;33mVERSION: \e[1;31m$(cat /etc/versin_script_new)"' >>.bashrc
@@ -304,7 +304,7 @@ install_official() {
   echo 'echo -e "\t\033[97mTO DISPLAY BASH PANEL TYPE: sudo VPSAGN or menu "' >>.bashrc
   echo 'echo ""' >>.bashrc
   rm -rf /usr/bin/pytransform &>/dev/null
-  rm -rf sinnombre-vps-master.sh
+  rm -rf VPS-SN.sh
   rm -rf lista-arq
   service ssh restart &>/dev/null
   clear && clear
