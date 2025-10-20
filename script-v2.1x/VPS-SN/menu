@@ -117,7 +117,7 @@ fun_trans() {
     local LINGUAGE=$(cat ${SCPidioma})
     [[ -z $LINGUAGE ]] && LINGUAGE=en
     [[ $LINGUAGE = "en" ]] && echo "$@" && return
-    [[ ! -e /usr/bin/trans ]] && wget -O /usr/bin/trans https://raw.githubusercontent.com/SINNOMBRE22/VPS-SN/master/LINKS-LIBRARIES/trans &>/dev/null
+    [[ ! -e /usr/bin/trans ]] && wget -O /usr/bin/trans https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/LINKS-LIBRARIES/trans &>/dev/null
     [[ ! -e /etc/VPS-SN/texto-mx ]] && touch /etc/VPS-SN/texto-mx
     source /etc/VPS-SN/texto-mx
     if [[ -z "$(echo ${texto[$@]})" ]]; then
@@ -130,7 +130,7 @@ fun_trans() {
 }
 function_verify() {
 
-    v1=$(curl -sSL "https://raw.githubusercontent.com/SINNOMBRE22/VPS-SN/master/script-v2.1x/Version")
+    v1=$(curl -sSL "https://raw.githubusercontent.com/SINNOMBRE22/sinnombre-vps-master/master/script-v2.1x/Version")
     echo "$v1" >/etc/versin_script
 }
 atualiza_fun() {
