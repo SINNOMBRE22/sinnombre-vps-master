@@ -15,6 +15,7 @@ echo "$v1" >/etc/versin_script
 [[ ! -e /etc/versin_script ]] && echo 1 >/etc/versin_script
 v22=$(cat /etc/versin_script)
 vesaoSCT="\033[1;31m [ \033[1;32m($v22)\033[1;97m\033[1;31m ]"
+
 ### COLORS AND BAR
 msg() {
    BRAN='\033[1;37m' && RED='\e[31m' && GREEN='\e[32m' && YELLOW='\e[33m'
@@ -88,8 +89,6 @@ title() {
   fi
   msg -bar
 }
-
-
 
 stop_install() {
   title "INSTALLATION CANCELED"
@@ -288,7 +287,7 @@ install_official() {
 # MENUS
 /bin/cp /etc/skel/.bashrc ~/
 /bin/cp /etc/skel/.bashrc /etc/bash.bashrc
-echo -ne " \e[1;93m [\e[1;32m1\e[1;93m]\033[1;31m > \e[1;97m INSTALL OFFICIAL 8.6 \e[97m \n"
+echo -ne " \e[1;93m [\e[1;32m1\e[1;93m]\033[1;31m > \e[1;97m INSTALL 8.6 OFFICIAL \e[97m \n"
 msg -bar
 echo -ne "\033[1;97mEnter only the number according to your answer:\e[32m "
 read opcao
